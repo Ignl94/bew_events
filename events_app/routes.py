@@ -34,6 +34,7 @@ def event_detail(event_id):
 def rsvp(event_id):
     """RSVP to an event."""
     # TODO: Get the event with the given id from the database
+    event = Event.query.get(event_id)
     is_returning_guest = request.form.get('returning')
     guest_name = request.form.get('guest_name')
 
