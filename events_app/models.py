@@ -16,7 +16,7 @@ class Guest(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     phone = db.Column(db.Integer, unique=True, nullable=False)
     events_attending = db.relationship(
-        'Event', secondary="guest_event", back_populates='guests')
+        'Event', secondary="guest_event", backref='guests')  # used back_populates prior to backref
 
 # TODO: Create a model called `Event` with the following fields:
 # - id: primary key
@@ -35,7 +35,7 @@ class Event(db.Model):
     description = db.Column(db.String(120), unique=False, nullable=False)
     date_and_time = db.Column(db.DateTime(),)
     guests = db.relationship(
-        'Guest', secondary='guest_event', back_populates='events_attending')
+        'Guest', secondary='guest_event', backref='events_attending')
 
 # TODO: Create a table `guest_event_table` with the following columns:
 # - event_id: Integer column (foreign key)
