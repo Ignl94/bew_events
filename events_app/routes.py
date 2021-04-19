@@ -34,6 +34,7 @@ def event_detail(event_id):
 def rsvp(event_id):
     """RSVP to an event."""
     # TODO: Get the event with the given id from the database
+    event = Event.query.get(event_id)
     is_returning_guest = request.form.get('returning')
     guest_name = request.form.get('guest_name')
 
@@ -41,7 +42,7 @@ def rsvp(event_id):
         # TODO: Look up the guest by name, and add the event to their
         # events_attending, then commit to the database
         add_guest = Guest.query.filter_by(name=guest_name).one()
-        add_guest.events_attending.append(event_id)
+        add_guest.events_attending.append(event)
         db.session.add(add_guest)
         db.session.commit()
     else:
@@ -51,7 +52,7 @@ def rsvp(event_id):
         # add the event to their events_attending, then commit to the database
         new_guest = Guest(name=guest_name, email=guest_email,
                           phone=guest_phone)
-        new_guest.events_attending.append(event_id)
+        new_guest.events_attending.append(event)
         db.session.add(new_guest)
         db.session.commit()
 

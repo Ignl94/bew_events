@@ -61,7 +61,7 @@
 
 <ul>
   {% for guest in single_event.guests %}
-  <li><a href="/guest/{{guest.id}}">{{guest}}</a></li>
+  <li><a href="/guest/{{guest.id}}">{{guest.name}}</a></li>
   {% endfor %}
 </ul>
 {% endblock %}
